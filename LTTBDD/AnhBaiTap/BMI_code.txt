@@ -1,0 +1,46 @@
+public class MainActivity extends AppCompatActivity {
+    EditText dk_ChieuCao,dk_CanNang;
+    Button dk_TT;
+    TextView dk_KQ;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+             dk_ChieuCao=(EditText) findViewById(R.id.edtCC);
+             dk_CanNang=(EditText) findViewById(R.id.edtCN);
+             dk_KQ=(TextView) findViewById(R.id.tvKQ);
+             dk_TT=(Button) findViewById(R.id.btnTT);
+        DecimalFormat dcf = new DecimalFormat("0.00");// dinh dang lay den 2 con so
+            dk_TT.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    double ChieuCao=Double.parseDouble(dk_ChieuCao.getText().toString());
+                    double CanNang=Double.parseDouble(dk_CanNang.getText().toString());
+                    double BMI= (double) Math.round(((CanNang/(ChieuCao*ChieuCao))*100)/100);
+                    if (BMI < 18) {
+                        Toast.makeText(MainActivity.this, "Bạn Hơi Gầy Cần Ăn Nhiều Thêm !", Toast.LENGTH_LONG).show();
+                    }
+                    else  if ((18. <= BMI) && (BMI < 24.9)) {
+                        Toast.makeText(MainActivity.this, "Bạn Bình Thường  !", Toast.LENGTH_LONG).show();
+                    }
+                    else  if (BMI == 25) {
+                        Toast.makeText(MainActivity.this, "Bạn Thua Can !", Toast.LENGTH_LONG).show();
+                    }
+                    else if (25 <= BMI && BMI < 29.9) {
+                        Toast.makeText(MainActivity.this, "Bạn tien beo phi  !", Toast.LENGTH_LONG).show();
+                    }
+                    else if (30 <= BMI && BMI < 34.9) {
+                        Toast.makeText(MainActivity.this, "Bạn Beo Phi Do 1 !", Toast.LENGTH_LONG).show();
+                    }
+                    else  if (35 <= BMI && BMI < 39.9) {
+                        Toast.makeText(MainActivity.this, "Bạn Beo Phi Do 2 !", Toast.LENGTH_LONG).show();
+                    }
+                    else if (BMI == 40) {
+                        Toast.makeText(MainActivity.this, "Bạn Beo Phi Do 3 !", Toast.LENGTH_LONG).show();
+                    }
+                    dk_KQ.setText(dcf.format(BMI));
+                }
+            });
+        }
+    }
